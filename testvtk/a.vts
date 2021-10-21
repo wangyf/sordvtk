@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<VTKFile type="StructuredGrid" version="0.1" byte_order="LittleEndian">
+  <StructuredGrid WholeExtent="+1 +3 +1 +2 +1 +2">
+    <Piece Extent="+1 +3 +1 +2 +1 +2">
+      <Points>
+        <DataArray type="Float32" NumberOfComponents="3" Name="Points" format="binary">
+          kAAAAAAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAIA/AAAAAAAAAEAAAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAAAAAACAPwAAAEAAAAAAAACAPwAAAAAAAIA/AACAPwAAgD8AAIA/AACAPwAAAEAAAIA/AACAPw==
+        </DataArray>
+      </Points>
+      <PointData>
+        <DataArray type="Float32" Name="vn" NumberOfComponents="1" format="binary">
+          MAAAAAAAAAAAAIA/AAAAQAAAAAAAAIA/AAAAQAAAAAAAAIA/AAAAQAAAAAAAAIA/AAAAQA==
+        </DataArray>
+      </PointData>
+      <CellData>
+        <DataArray type="Float32" Name="vc" NumberOfComponents="1" format="binary">
+          CAAAAAAAAAAAAIA/
+        </DataArray>
+      </CellData>
+    </Piece>
+  </StructuredGrid>
+</VTKFile>
