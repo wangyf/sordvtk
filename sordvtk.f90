@@ -2,7 +2,8 @@
 program sordvtk
 ! Feb 2017 version 1.1 only output nodal field (done)
 ! Jul 2017 version 1.2 add output nodal and cellar field (done)
-! Jul 2017 version 1.3 add output vector (nodal & cellar) field (undone)
+! Jul 2017 version 1.3 add output vector (nodal & cellar) field (done)
+! Mar 2022 version 1.3 add output format (binary or ascii) (done)
 
 use IR_Precision
 use Lib_VTK_IO
@@ -18,7 +19,7 @@ use m_byteswap
   integer:: E_IO, data_endian, it, cf, nfield,iab
   real :: time, dt
   CHARACTER(LEN=1024) :: line, words(40)
-  CHARACTER(LEN=80) :: outstr,filename
+  CHARACTER(LEN=80) :: outstr,filename,output_format
   CHARACTER(LEN=8) :: fmt
   logical :: input_swap
   !!!!!
@@ -65,6 +66,17 @@ use m_byteswap
   read(*,'(A)') ou_folder  
   print *,in_folder
   print *,ou_folder
+
+  read(*,'(A)') output_format
+  select case(trim(output_format))
+  case('ASCII')
+    write(0,*) 'Output format is ASCII'
+  case('BINARY')
+    write(0,*) 'Output format is BINARY'
+  case default
+    stop "Please assign output format (ASCII or BINARY)"
+  end select
+
   read(*,*) n1
   ! convert non-time dependent files
   if (n1 > 0) then
@@ -168,7 +180,7 @@ use m_byteswap
   	end do
   	
   	fname = trim(ou_folder)//'/'//trim(filename)//'.vts'
-      E_IO = VTK_INI_XML(output_format='binary',filename=fname,mesh_topology='StructuredGrid',&
+      E_IO = VTK_INI_XML(output_format=output_format,filename=fname,mesh_topology='StructuredGrid',&
             nx1=1,nx2=nx,ny1=1,ny2=ny,nz1=1,nz2=nz)
       E_IO = VTK_GEO_XML(nx1=1,nx2=nx,ny1=1,ny2=ny,nz1=1,nz2=nz,NN=nn,X=x,Y=y,Z=z)
   	
@@ -318,7 +330,7 @@ if (n2 > 0) then
   		end do
   		 		
 		fname = trim(ou_folder)//'/'//trim(filename)//trim(outstr)//'.vts'
-      	E_IO = VTK_INI_XML(output_format='binary',filename=fname,mesh_topology='StructuredGrid',&
+      	E_IO = VTK_INI_XML(output_format=output_format,filename=fname,mesh_topology='StructuredGrid',&
             	nx1=1,nx2=nx,ny1=1,ny2=ny,nz1=1,nz2=nz)
       	E_IO = VTK_GEO_XML(nx1=1,nx2=nx,ny1=1,ny2=ny,nz1=1,nz2=nz,NN=nn,X=x,Y=y,Z=z)
   		
